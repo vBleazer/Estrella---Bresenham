@@ -1,59 +1,49 @@
-
-const p1 = {x: 0, y:0}
-const p2 = {x: this.innerWidth, y: this.innerHeight}
-const p3 = {x: (this.innerWidth/2), y: 0}
-const p4 = {x: (this.innerWidth/2), y: this.innerHeight}
-const p5 = {x: 0, y: (this.innerHeight/2)}
-const p6 = {x: this.innerWidth, y: (this.innerHeight/2)}
-const p7 = {x: this.innerWidth, y: 0}
-const p8 = {x: 0, y: this.innerHeight}
-
-function setup() {
-	createCanvas(windowWidth, windowHeight)
+var resultado;
+var ax,ay;
+var x,y;
+var mitadWidth,mitadHeight
+function setup() 
+{
+  createCanvas(windowWidth, windowHeight);
+  mitadWidth=windowWidth/2
+  mitadHeight=windowHeight/2
 }
 
-function draw() {
-
-	ecuapp(p1, p2)
-	ecuapp(p3, p4)
-	ecuapp(p5, p6)
-	ecuapp(p7, p8)
-
+function draw() 
+{
+	ADDA(0,0,windowWidth,windowHeight)
+	ADDA(mitadWidth,0,mitadWidth,windowHeight)
+	ADDA(windowWidth,0,0,windowHeight)
+	ADDA(0,mitadHeight,windowWidth,mitadHeight)
+  noLoop()
 }
 
-function ecuapp(p1, p2){
+function ADDA(x1, y1, x2, y2) 
+{
+  let dx=x2-x1
+  let dy=y2-y1
 
-	const dx = p2.x - p1.x
-	const dy = p2.y - p1.y
+  let x=x1
+  let y= y1
 
-	const m = dy / dx
-	const b = p1.y - m * p1.x
+  let i = 0
 
-	point(p1.x, p1.y)
-	
-	let x = p1.x + 1
-	
-	let y 
-	while(x != p2.x){
+  let limite
 
-		y = m * x + b
+  if(Math.abs(dx)>Math.abs(dy))
+    limite=Math.abs(dx)
+  else
+    limite=Math.abs(dy)
 
-		point(x, y)
+  let xi=dx/limite
+  let yi=dy/limite
+ 
+  while(i < limite){
+		point(x,y)
+		x += xi
+		y += yi 
 
-		if(p2.x > p1.x){
-			x++
-		}else{
-			x--
-		}
-
-	}
-
-	if(p1.x == p2.x){
-		y = p1.y 
-		while(y != p2.y){
-			point(x, y)
-			y++
-		}
+		i++
 	}
 
 
