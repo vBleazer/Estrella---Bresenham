@@ -1,50 +1,49 @@
 var resultado;
 var ax,ay;
 var x,y;
-var mitadWidth,mitadHeight
+var mWidth,mHeight
+var cont = 0
 function setup() 
 {
-  createCanvas(windowWidth, windowHeight);
-  mitadWidth=windowWidth/2
-  mitadHeight=windowHeight/2
+  createCanvas(windowWidth, windowHeight);  
+  mWidth=windowWidth/2
+  mHeight=windowHeight/2
 }
 
 function draw() 
 {
-	ADDA(0,0,windowWidth,windowHeight)
-	ADDA(mitadWidth,0,mitadWidth,windowHeight)
-	ADDA(windowWidth,0,0,windowHeight)
-	ADDA(0,mitadHeight,windowWidth,mitadHeight)
+	bresenham(0,0,windowWidth,windowHeight)
+	bresenham(mWidth,0,mWidth,windowHeight)
+	bresenham(windowWidth,0,0,windowHeight)
+	bresenham(0,mHeight,windowWidth,mHeight)
   noLoop()
 }
 
-function ADDA(x1, y1, x2, y2) 
+function bresenham(x1, y1, x2, y2) 
 {
-  let dx=x2-x1
-  let dy=y2-y1
-
-  let x=x1
-  let y= y1
-
-  let i = 0
-
-  let limite
-
-  if(Math.abs(dx)>Math.abs(dy))
-    limite=Math.abs(dx)
-  else
-    limite=Math.abs(dy)
-
-  let xi=dx/limite
-  let yi=dy/limite
- 
-  while(i < limite){
-		point(x,y)
-		x += xi
-		y += yi 
-
-		i++
-	}
-
+  if (cont<=4) {
+    let dx=x2-x1
+    let dy=y2-y1
+  
+    let limite
+    if(Math.abs(dx)>Math.abs(dy))
+      limite=Math.abs(dx)
+    else
+      limite=Math.abs(dy)
+  
+      let xi=dx/limite
+      let yi=dy/limite
+  
+      let x=x1
+      let y=y1
+    
+      for(let i=0;i<limite;i++)
+      {
+        point(x, y)
+        x+=xi
+        y+=yi
+      }
+      cont++;
+  }
 
 }
